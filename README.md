@@ -1,5 +1,5 @@
-# GMet
-GMet is to solve the following pains:
+# XMet
+XMet is to solve the following pains:
 * Various metrics solution in a group bring the hard problems of maintaining. Even, the whole group uses unified data aggregation and demonstration solution such as: ELK (ElasticSearch LogStach Kibana) or EFK (ElasticSearch FluentD Kibana). Because, the way to output metric log/data and the format of log/data are normally different. 
 
 * The ineffcient metric data creating and extracting ways take huge CPU resouce.
@@ -9,11 +9,12 @@ GMet is to solve the following pains:
 * Creating metric monitor is a time-consuming task, which needs to write and debug the configurations for the related systems (fluentD, elastic search)
 
 
-GMet is to help you create the program running metrics quickly and easily.
+XMet is to help you create the program running metrics quickly and easily.
 * Easy to use. To send the metrics, just one line code is needed.
 * Easy to extend. GMet is based on the plugin structure, it is open to extend and by ioslated with the abstract layer, the changes are transparent to the clients.
 * Easy to maintain. Use the unified API to avoid varied and messy implementations. Deal with different strategies on log and metric data by separating them.
 
+##GMet is the golang API of XMet.
 
 ```Golang
 //The following example is to demonstrate how to use GMet.
