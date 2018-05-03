@@ -33,4 +33,4 @@ func main() {
 	}
 }
 ```
-For the example, please, refer to https://github.com/chaocai2001/g_met_examples
+For the example, please, refer to https://github.com/mobvisita/g_met_example
