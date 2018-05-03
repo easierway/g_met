@@ -14,7 +14,7 @@ XMet is to help you create the program running metrics quickly and easily.
 * Easy to extend. GMet is based on the plugin structure, it is open to extend and by ioslated with the abstract layer, the changes are transparent to the clients.
 * Easy to maintain. Use the unified API to avoid varied and messy implementations. Deal with different strategies on log and metric data by separating them.
 
-##GMet is the golang API of XMet.
+## GMet is the golang API of XMet.
 
 ```Golang
 //The following example is to demonstrate how to use GMet.
