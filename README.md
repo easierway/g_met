@@ -1,8 +1,8 @@
 # XMet
 XMet is to solve the following pains:
-* Various metrics solution in a group bring the hard problems of maintaining. Even, the whole group uses unified data aggregation and demonstration solution such as: ELK (ElasticSearch LogStach Kibana) or EFK (ElasticSearch FluentD Kibana). Because, the way to output metric log/data and the format of log/data are normally different. 
+* Various metric solutions bring the hard problems of maintaining. Even, the whole group uses unified data aggregation and demonstration solution such as: ELK (ElasticSearch LogStach Kibana) or EFK (ElasticSearch FluentD Kibana). Because, the way to report metric log/data and the format of log/data are normally different. 
 
-* The ineffcient metric data creating and extracting ways take huge CPU resouce.
+* The ineffcient metric data creating and extracting ways take huge CPU resource.
 
 * So many different configurations (fluentD configurations, elasticsearch mappings), which are hard to maintain.
 
