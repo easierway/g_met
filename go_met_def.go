@@ -5,8 +5,8 @@ package g_met
 
 //Metric Item
 type MetricItem struct {
-	Key   string //metric item name
-	Value string //metric value
+	Key   string      //metric item name
+	Value interface{} //metric value
 }
 
 type GMet interface {

@@ -4,6 +4,7 @@ package g_met
 
 import (
 	"bytes"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -33,12 +34,13 @@ func (formatter *LtrFormatter) Format(metrics []MetricItem) (string, error) {
 	buf.WriteString(SEC_SPLITTER)
 	buf.WriteString(HostAddr.Key)
 	buf.WriteString(FIELD_SPLITTER)
-	buf.WriteString(replaceSplitterCharsInValue(HostAddr.Value))
+	buf.WriteString(replaceSplitterCharsInValue(HostAddr.Value.(string)))
 	buf.WriteString(SEC_SPLITTER)
 	for _, metric := range metrics {
 		buf.WriteString(replaceSplitterCharsInValue(metric.Key))
 		buf.WriteString(FIELD_SPLITTER)
-		buf.WriteString(replaceSplitterCharsInValue(metric.Value))
+		value := fmt.Sprintf("%v", metric.Value)
+		buf.WriteString(replaceSplitterCharsInValue(value))
 		buf.WriteString(SEC_SPLITTER)
 	}
 	return buf.String(), nil
