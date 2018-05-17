@@ -31,4 +31,5 @@ func main() {
 	}
 }
 ```
-For the example, please, refer to https://github.com/mobvisita/g_met_example
+For the example, please, refer to https://github.com/easierway/g_met_example/blob/master/main/g_met_examples.go
+
