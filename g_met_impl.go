@@ -8,13 +8,23 @@ import (
 )
 
 const (
-	HOST_ADDR     = "HostAddr"
+	HOST_ADDR     = "host"
 	MISSING_VALUE = "N/A"
 )
 
 type GMetInstance struct {
 	metWriter    MetWriter    //metrics data writer
 	metFormatter MetFormatter //metrics formatter
+}
+
+var HostAddr MetricItem
+
+func init() {
+	var err error
+	HostAddr, err = IpAddress()
+	if err != nil {
+		HostAddr = Metric(HOST_ADDR, err.Error())
+	}
 }
 
 func CreateGMetInstance(metWriter MetWriter, metFormatter MetFormatter) GMet {

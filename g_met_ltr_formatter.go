@@ -31,6 +31,10 @@ func (formatter *LtrFormatter) Format(metrics []MetricItem) (string, error) {
 	buf.WriteString(FIELD_SPLITTER)
 	buf.WriteString(strconv.FormatInt(time.Now().Unix(), 10))
 	buf.WriteString(SEC_SPLITTER)
+	buf.WriteString(HostAddr.Key)
+	buf.WriteString(FIELD_SPLITTER)
+	buf.WriteString(replaceSplitterCharsInValue(HostAddr.Value))
+	buf.WriteString(SEC_SPLITTER)
 	for _, metric := range metrics {
 		buf.WriteString(replaceSplitterCharsInValue(metric.Key))
 		buf.WriteString(FIELD_SPLITTER)
