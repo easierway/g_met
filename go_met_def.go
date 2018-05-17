@@ -30,6 +30,6 @@ type MetFormatter interface {
 }
 
 //Create a MetricItem. Metric method helps you write the concise code
-func Metric(key string, value string) MetricItem {
+func Metric(key string, value interface{}) MetricItem {
 	return MetricItem{key, value}
 }
