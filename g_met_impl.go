@@ -41,7 +41,7 @@ func CreateGMetInstanceByDefault(metricsFile string) GMet {
 		panic(err)
 	}
 	//create GMet instance by given the writer and the formatter
-	gmet := CreateGMetInstance(writer, &LtrFormatter{})
+	gmet := CreateGMetInstance(writer, &JSON_Formatter{})
 	return gmet
 }
 
