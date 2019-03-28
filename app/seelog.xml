@@ -1,8 +1,10 @@
 <seelog>
     <outputs>
-        <console formatid="colored"/>
+        <console formatid="console"/>
+        <conn formatid="syslog" net="tcp" addr="localhost:514" tls="false" />
     </outputs>
     <formats>
-        <format id="colored" format="%Date %Time [%LEVEL] %Msg%n"/>
+        <format id="console" format="%Date %Time [%LEVEL] %Msg%n"/>
+        <format id="syslog" format="[%LEVEL] %Msg%n"/>
     </formats>
 </seelog>
