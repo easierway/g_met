@@ -1,0 +1,8 @@
+<seelog>
+    <outputs>
+        <console formatid="colored"/>
+    </outputs>
+    <formats>
+        <format id="colored" format="%Date %Time [%LEVEL] %Msg%n"/>
+    </formats>
+</seelog>
