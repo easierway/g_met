@@ -12,7 +12,7 @@ const (
 	HOST_ADDR     = "host"
 	HOST_NAME     = "hostname"
 	MISSING_VALUE = "N/A"
-	SYSTYPE       = "_type"
+	SYSTYPE       = "systype"
 )
 
 type GMetInstance struct {
