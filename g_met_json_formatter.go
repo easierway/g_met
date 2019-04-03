@@ -33,6 +33,8 @@ func (formatter *JSON_Formatter) Format(metrics []MetricItem) (string, error) {
 	buf.WriteString(toJSON_SEC(TIMESTAMP_KEY, time.Now()))
 	buf.WriteString(",")
 	buf.WriteString(toJSON_SEC(HOST_ADDR, HostAddr.Value))
+	buf.WriteString(",")
+	buf.WriteString(toJSON_SEC(HOST_NAME, HostName.Value))
 
 	for _, metric := range metrics {
 		buf.WriteString(",")

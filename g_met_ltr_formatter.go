@@ -1,5 +1,5 @@
-//The format is [Metric Name][Field Splitter][Metric Value][Section Splitter][Metric Name][Field Splitter][Metric Value]
-//Created on 2018.5
+// The format is [Metric Name][Field Splitter][Metric Value][Section Splitter][Metric Name][Field Splitter][Metric Value]
+// Created on 2018.5
 package g_met
 
 import (
@@ -35,6 +35,10 @@ func (formatter *LtrFormatter) Format(metrics []MetricItem) (string, error) {
 	buf.WriteString(HostAddr.Key)
 	buf.WriteString(FIELD_SPLITTER)
 	buf.WriteString(replaceSplitterCharsInValue(HostAddr.Value.(string)))
+	buf.WriteString(SEC_SPLITTER)
+	buf.WriteString(HostName.Key)
+	buf.WriteString(FIELD_SPLITTER)
+	buf.WriteString(replaceSplitterCharsInValue(HostName.Value.(string)))
 	buf.WriteString(SEC_SPLITTER)
 	for _, metric := range metrics {
 		buf.WriteString(replaceSplitterCharsInValue(metric.Key))
