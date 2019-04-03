@@ -40,6 +40,11 @@ func (formatter *LtrFormatter) Format(metrics []MetricItem) (string, error) {
 	buf.WriteString(FIELD_SPLITTER)
 	buf.WriteString(replaceSplitterCharsInValue(HostName.Value.(string)))
 	buf.WriteString(SEC_SPLITTER)
+	buf.WriteString(SysType.Key)
+	buf.WriteString(FIELD_SPLITTER)
+	buf.WriteString(replaceSplitterCharsInValue(SysType.Value.(string)))
+	buf.WriteString(SEC_SPLITTER)
+
 	for _, metric := range metrics {
 		buf.WriteString(replaceSplitterCharsInValue(metric.Key))
 		buf.WriteString(FIELD_SPLITTER)

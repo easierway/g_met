@@ -12,6 +12,7 @@ const (
 	HOST_ADDR     = "host"
 	HOST_NAME     = "hostname"
 	MISSING_VALUE = "N/A"
+	SYSTYPE       = "_type"
 )
 
 type GMetInstance struct {
@@ -21,6 +22,7 @@ type GMetInstance struct {
 
 var HostAddr MetricItem
 var HostName MetricItem
+var SysType MetricItem
 
 func init() {
 	var err error
@@ -34,7 +36,7 @@ func init() {
 	} else {
 		HostName = Metric(HOST_NAME, hostname)
 	}
-
+	SysType = Metric(SYSTYPE, MISSING_VALUE)
 }
 
 func CreateGMetInstance(metWriter MetWriter, metFormatter MetFormatter) GMet {
@@ -43,8 +45,8 @@ func CreateGMetInstance(metWriter MetWriter, metFormatter MetFormatter) GMet {
 }
 
 // Create GMet Instance with default settings.
-// (with seelog writer and ltr format
-func CreateGMetInstanceByDefault(metricsFile string) GMet {
+// with seelog writer and json format
+func CreateGMetInstanceByDefault(metricsFile string, sysType string) GMet {
 	// create a metric writer
 	writer, err := CreateMetWriterBySeeLog(metricsFile)
 	if err != nil {
@@ -52,6 +54,9 @@ func CreateGMetInstanceByDefault(metricsFile string) GMet {
 	}
 	// create GMet instance by given the writer and the formatter
 	gmet := CreateGMetInstance(writer, &JSON_Formatter{})
+
+	// set the systype
+	SysType.Value = sysType
 	return gmet
 }
 
