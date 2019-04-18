@@ -16,8 +16,9 @@ const (
 )
 
 type GMetInstance struct {
-	metWriter    MetWriter    // metrics data writer
-	metFormatter MetFormatter // metrics formatter
+	metAggregator MetAggregator // metrics aggregator
+	metFormatter  MetFormatter  // metrics formatter
+	metWriter     MetWriter     // metrics data writer
 }
 
 var HostAddr MetricItem
@@ -39,21 +40,23 @@ func init() {
 	SysType = Metric(SYSTYPE, MISSING_VALUE)
 }
 
-func CreateGMetInstance(metWriter MetWriter, metFormatter MetFormatter) GMet {
-	ins := GMetInstance{metWriter, metFormatter}
+func CreateGMetInstance(metAggregator MetAggregator, metFormatter MetFormatter, metWriter MetWriter) GMet {
+	ins := GMetInstance{metAggregator, metFormatter, metWriter}
 	return &ins
 }
 
 // Create GMet Instance with default settings.
 // with seelog writer and json format
 func CreateGMetInstanceByDefault(metricsFile string, sysType string) GMet {
+	// create a aggregator
+	aggregator, err := CreateDummyAggregator()
 	// create a metric writer
 	writer, err := CreateMetWriterBySeeLog(metricsFile)
 	if err != nil {
 		panic(err)
 	}
 	// create GMet instance by given the writer and the formatter
-	gmet := CreateGMetInstance(writer, &JSON_Formatter{})
+	gmet := CreateGMetInstance(aggregator, &JSON_Formatter{}, writer)
 
 	// set the systype
 	SysType.Value = sysType
@@ -77,7 +80,7 @@ func (gmet *GMetInstance) Close() error {
 	return gmet.metWriter.Close()
 }
 
-// Get the local IP adress
+// Get the local IP address
 func IpAddress() (MetricItem, error) {
 	addrs, err := net.InterfaceAddrs()
 	if err != nil {

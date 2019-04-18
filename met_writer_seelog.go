@@ -1,5 +1,5 @@
-//Implemented MetWriter interface with seelog
-//Created on 2018.5
+// Implemented MetWriter interface with seelog
+// Created on 2018.5
 
 package g_met
 

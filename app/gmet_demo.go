@@ -14,8 +14,8 @@ func main() {
 	for i := 0; i < 100; i++ {
 		gmet.Send(Metric("input_bytes", rand.Intn(100)),
 			Metric("output_bytes", rand.Intn(100)))
-		gmet.Flush() // in your real case, DON'T flush for each sending.
 		// For seelog writer, the auto-flushing can be set in the log configuration
 		time.Sleep(time.Millisecond * 500)
 	}
+	gmet.Flush() // in your real case, DON'T flush for each sending.
 }
