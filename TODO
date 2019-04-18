@@ -1,0 +1,5 @@
+feature
+* we will use this gmet flush all the logs, including trace log or watch log (stats log).
+
+feature
+* add adnnet flush aggregating plugin, counting metric as needed.
