@@ -48,7 +48,7 @@ func CreateGMetInstance(metAggregator MetAggregator, metFormatter MetFormatter, 
 // Create GMet Instance with default settings.
 // with seelog writer and json format
 func CreateGMetInstanceByDefault(metricsFile string, sysType string) GMet {
-	// create a aggregator
+	// create a metric dummy aggregator default
 	aggregator, err := CreateDummyAggregator()
 	// create a metric writer
 	writer, err := CreateMetWriterBySeeLog(metricsFile)
@@ -57,13 +57,16 @@ func CreateGMetInstanceByDefault(metricsFile string, sysType string) GMet {
 	}
 	// create GMet instance by given the writer and the formatter
 	gmet := CreateGMetInstance(aggregator, &JSON_Formatter{}, writer)
-
 	// set the systype
 	SysType.Value = sysType
 	return gmet
 }
 
 func (gmet *GMetInstance) Send(metrics ...MetricItem) error {
+	// aggregate
+	// TODO: add error check
+	gmet.metAggregator.Aggregate(metrics)
+	// format
 	if formatted, err := gmet.metFormatter.Format(metrics); err != nil {
 		return err
 	} else {
@@ -73,11 +76,23 @@ func (gmet *GMetInstance) Send(metrics ...MetricItem) error {
 }
 
 func (gmet *GMetInstance) Flush() {
+	// TODO: repeated logic
+	metrics := gmet.metAggregator.GetMetrics()
+	if formatted, err := gmet.metFormatter.Format(metrics); err != nil {
+		return
+	} else {
+		gmet.metWriter.Write(formatted)
+	}
 	gmet.metWriter.Flush()
 }
 
 func (gmet *GMetInstance) Close() error {
 	return gmet.metWriter.Close()
+}
+
+func (gmet *GMetInstance) WithAggregator(aggregator MetAggregator) GMet {
+	gmet.metAggregator = aggregator
+	return gmet
 }
 
 // Get the local IP address
