@@ -4,6 +4,10 @@ type AdnetAggregator struct {
 	data map[string]interface{}
 }
 
+const (
+	DataSize = 32
+)
+
 func (aggregator *AdnetAggregator) Aggregate(metrics []MetricItem) error{
 	// TODO: add lock, and custom adn itself
 	for _, metric := range metrics {
@@ -31,11 +35,12 @@ func (aggregator *AdnetAggregator) GetMetrics() ([]MetricItem) {
 	for key, value := range aggregator.data {
 		metrics = append(metrics, Metric(key, value))
 	}
+	aggregator.data = make(map[string]interface{}, DataSize)
 	return metrics
 }
 
 func CreateAdnetAggregator() (MetAggregator) {
 	aggregator := new(AdnetAggregator)
-	aggregator.data = make(map[string]interface{})
+	aggregator.data = make(map[string]interface{}, DataSize)
 	return aggregator
 }
