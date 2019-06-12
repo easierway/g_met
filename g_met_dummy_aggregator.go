@@ -3,7 +3,7 @@ package g_met
 type DummyAggregator struct {
 }
 
-func (aggregator *DummyAggregator) Aggregate(metric []MetricItem) error{
+func (aggregator *DummyAggregator) Aggregate(metrics []MetricItem) error{
 	return nil
 }
 

@@ -15,6 +15,7 @@ type GMet interface {
 	// flush out the data from cache
 	Flush()
 	Close() error
+	WithAggregator(aggregator MetAggregator) GMet
 }
 
 

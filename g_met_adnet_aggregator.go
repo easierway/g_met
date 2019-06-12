@@ -1,25 +1,46 @@
 package g_met
 
-
 type AdnetAggregator struct {
-	metrics map[string]interface{}
+	data map[string]interface{}
 }
 
-func (aggregator *AdnetAggregator) Aggregate(metric []MetricItem) error{
+const (
+	DataSize = 32
+)
+
+func (aggregator *AdnetAggregator) Aggregate(metrics []MetricItem) error{
+	// TODO: add lock, and custom adn itself
+	for _, metric := range metrics {
+		if metric.Key == "requestid" {
+			if value, exist := aggregator.data["request_num"]; exist {
+				aggregator.data["request_num"] = value.(int) + 1
+			} else {
+				aggregator.data["request_num"] = 1
+			}
+		}
+
+		if metric.Key == "input_bytes" {
+			if value, exist := aggregator.data["input_bytes"]; exist {
+				aggregator.data["input_bytes"] = value.(int) + metric.Value.(int)
+			} else {
+				aggregator.data["input_bytes"] = metric.Value.(int)
+			}
+		}
+	}
 	return nil
 }
 
 func (aggregator *AdnetAggregator) GetMetrics() ([]MetricItem) {
-	var metrics []MetricItem
+	metrics := make([]MetricItem, 0, len(aggregator.data))
+	for key, value := range aggregator.data {
+		metrics = append(metrics, Metric(key, value))
+	}
+	aggregator.data = make(map[string]interface{}, DataSize)
 	return metrics
 }
 
-func CreateAdnetAggregator() (MetAggregator, error) {
-	var err error
+func CreateAdnetAggregator() (MetAggregator) {
 	aggregator := new(AdnetAggregator)
-	if err != nil {
-		return nil, err
-	}
-
-	return aggregator, nil
+	aggregator.data = make(map[string]interface{}, DataSize)
+	return aggregator
 }
